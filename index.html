@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blinking Circle</title>
+    <style>
+      body {
+        background-color: black;
+        margin: 0;
+        padding: 0;
+        color: white;
+      }
+      
+      #circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: green;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: blink 1s infinite;
+      }
+      
+      @keyframes blink {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 0;
+        }
+        51% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      #color-selector {
+        margin-top: 20px;
+      }
+      
+      #frequency-slider {
+        margin-top: 20px;
+      }
+      
+      #frequency-value {
+        margin-top: 10px;
+        font-size: 16px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="circle"></div>
+    <div>
+      <label for="color-selector">Circle color:</label>
+      <select id="color-selector">
+        <option value="green" selected>Green</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+      </select>
+    </div>
+    <div>
+      <label for="frequency-slider">Blink frequency (Hz):</label>
+      <input type="range" id="frequency-slider" min="1" max="60" value="1">
+    </div>
+    <div id="frequency-value">1 Hz</div>
+    <script>
+      const circle = document.getElementById('circle');
+      const colorSelector = document.getElementById('color-selector');
+      const frequencySlider = document.getElementById('frequency-slider');
+      const frequencyValue = document.getElementById('frequency-value');
+      
+      colorSelector.addEventListener('change', () => {
+        circle.style.backgroundColor = colorSelector.value;
+      });
+      
+      frequencySlider.addEventListener('input', () => {
+        const frequency = frequencySlider.value;
+        circle.style.animationDuration = `${1 / frequency}s`;
+        frequencyValue.textContent = `${frequency} Hz`;
+      });
+    </script>
+  </body>
+</html>
+
